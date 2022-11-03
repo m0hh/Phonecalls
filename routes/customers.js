@@ -26,6 +26,36 @@ router.get('/',async (req,res)=> {
     }
 })
 
+router.patch('/:id',getOne, async (req,res)=>{
+    if (req.body.name != null){
+        req.customer.name = req.body.name
+    }
+    if(req.body.org != null){
+        req.customer.org =req.body.org
+    }
+    if (req.body.end != null){
+        req.customer.end = req.body.end
+    }
+    try{
+        updatedCustomer = await req.customer.save()
+        res.status(200).json(updatedCustomer)
+    }catch (err){
+        res.status(500).json({message:err.message})
+    }
+})
 
+async function getOne(req,res,next){
+    let customer
+    try{
+        customer = await Customer.findById(req.params.id)
+        if(customer == null){
+            res.status(400).json({message:"Customer not found"})
+        }
+    }catch(err){
+        res.status(500).json({message:err.message})
+    }
+    req.customer = customer
+    next()
+}
 
 module.exports = router
