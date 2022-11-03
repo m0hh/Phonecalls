@@ -14,7 +14,7 @@ db.once('open', ()=>{
 })
 
 app.use(bodyParser.urlencoded({ extended: false }))
-
+app.use(express.json())
 
 const customersRouter = require('./routes/customers')
 app.use('/customers', customersRouter)
