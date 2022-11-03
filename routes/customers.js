@@ -44,6 +44,15 @@ router.patch('/:id',getOne, async (req,res)=>{
     }
 })
 
+router.delete("/:id", getOne, async(req,res)=>{
+    try{
+        await req.customer.remove()
+        res.status(200).json({message:"Deleted succesfuly"})
+    }catch (err){
+        res.status(500).json({message:err.message})
+    }
+})
+
 async function getOne(req,res,next){
     let customer
     try{
