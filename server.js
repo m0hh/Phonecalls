@@ -13,6 +13,12 @@ db.once('open', ()=>{
     console.log('connected to Database')
 })
 
+app.use(bodyParser.urlencoded({ extended: false }))
+
+
+const customersRouter = require('./routes/customers')
+app.use('/customers', customersRouter)
+
 
 
 app.listen(3000, ()=>{
