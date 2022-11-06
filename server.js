@@ -19,6 +19,9 @@ app.use(express.json())
 const customersRouter = require('./routes/customers')
 app.use('/customers', customersRouter)
 
+const pcustomerRouter = require('./routes/pCustomers')
+app.use('/pcustomers', pcustomerRouter)
+
 
 
 app.listen(3000, ()=>{
